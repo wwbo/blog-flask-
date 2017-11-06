@@ -1,0 +1,25 @@
+{% extends 'common/base.html' %}
+{% from 'common/macro.html' import pagination_show %}
+{% block title %}评论{% endblock %}
+
+{% block page_content %}
+{{wtf.quick_form(form)}}
+{% for p in posts %}
+<hr style="margin-top: 10px"/>
+    <ul class="media-list">
+
+        <li class="media">
+            <div class="media-left">
+                    <img class="media-object" src="{{url_for('static',filename='upload/'+p.user.icon)}}" style="width: 64px; height: 64px" alt="logo">
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{p.user.username}}</h4>
+                {{p.content}}
+            </div>
+        </li>
+    </ul>
+{% endfor %}
+{{ pagination_show(pagination, 'main.command',port=port ) }}
+
+
+{% endblock %}

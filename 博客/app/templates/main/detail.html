@@ -1,0 +1,29 @@
+{% extends 'common/base.html' %}
+{% from 'common/macro.html' import pagination_show %}
+{% block title %}
+博客
+{% endblock %}
+{% block page_content %}
+
+    <h2>发表的博客</h2>
+{% for p in posts %}
+<hr />
+<div class="media">
+  <div class="media-left">
+    <a href="#">
+      <img class="media-object"
+           src="{{url_for('static',filename = 'upload/' + p.user.icon)}}"
+           style="width: 64px; height: 64px"
+           alt="icon">
+    </a>
+  </div>
+  <div class="media-body">
+    <a href="#"><h4 class="media-heading">{{p.user.username}}</h4></a>
+      <a href="{{url_for('main.command',port=p.content)}}">{{p.content}}<a/>
+  </div>
+</div>
+{% endfor %}
+<hr />
+{{ pagination_show(pagination, 'main.detail' ,name=name ) }}
+{% endblock %}
+
